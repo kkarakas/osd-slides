@@ -3,6 +3,7 @@
 
 [![](https://img.shields.io/badge/project-link-green)](https://github.com/kkarakas/osd-slides)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![GitHub issues](https://img.shields.io/github/issues/kkarakas/osd-slides)
 
 ## Overview
 - Open Software Development classes slides are hard to turn it to a pdf and download, this tool will help students to download slides easily. 
