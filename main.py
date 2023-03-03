@@ -1,8 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 import sys
+import subprocess
 
-def downloadPdf():
+##https://www.geeksforgeeks.org/python-convert-html-pdf/
+## TODO be able to download individual files
+def searchAndDownloadPdf():
     # TODO perhaps better to use properties file using jproperties here instead of using a string.
     url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
     # TODO keeping track of when it was downloaded (it will be written on pdf
@@ -16,27 +19,21 @@ def downloadPdf():
         #instead of above one must check wheather each row contains viable rows
         try:
             file = table_rows[i].find('a')['href']
-            download(url,file)
+            downloadPdf(url,file)
         except:
             pass
 
     print("done")
 
-def download(url,file):
+def downloadPdf(url,file):
     #TODO like said above, url must be a global variable read through properties
 
     # info such as when downloaded can be extracted here
     print("Downloading file: ", file)
 
-    response = requests.get(url + file + "?print-pdf=true")
-
-    # Write content in pdf file
-    pdf = open(file + ".pdf", 'wb')
-    pdf.write(response.content)
-    pdf.close()
+    a = subprocess.run(["npx","decktape", "reveal", url + file + "#/",file[:-4]+ "pdf"], capture_output=True,check=True)
+    # print(a.stdout)
     print("File ", file, " downloaded")
-
-
 
 
 def main():
@@ -44,7 +41,7 @@ def main():
         print("Too many arguments")
 
     if sys.argv[1] == "download":
-        downloadPdf()
+        searchAndDownloadPdf()
 
 
 if __name__ == "__main__":

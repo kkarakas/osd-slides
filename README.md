@@ -12,3 +12,11 @@
 - Force download option eventough it already was downloaded
 - Links that actually work on the slides
 - Search through all the documents to find keywords
+
+##Depencies
+- Uses Decktape: https://github.com/astefanutti/decktape
+
+To install decktape, run in osd-slides.
+```sh
+$ npm install decktape
+```

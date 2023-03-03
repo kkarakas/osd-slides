@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Mac OS - added by Kutay
+.DS_STORE
