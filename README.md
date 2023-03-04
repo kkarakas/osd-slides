@@ -14,10 +14,17 @@
 - Links that actually work on the slides
 - Search through all the documents to find keywords
 
-##Depencies
+## Dependencies
 - Uses Decktape: https://github.com/astefanutti/decktape
 
 To install decktape, run in osd-slides.
 ```sh
 $ npm install decktape
+```
+You will need node.js on your computer for above to run.
+Check if node.js in your computer by running this. And then check the version of npm.
+You might want to restart your terminal/powershell after installing node.js.
+```sh
+$ Node --version
+$ npm --version
 ```

@@ -38,7 +38,7 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
+#htmlcov/
 .tox/
 .nox/
 .coverage
@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#Mac OS - added by Kutay
+#Mac OS and node - added by Kutay
 .DS_STORE
+node_modules/
