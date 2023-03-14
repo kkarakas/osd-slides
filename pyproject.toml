@@ -1,0 +1,144 @@
+#[tool.poetry]
+#name = "osd-slides"
+#version = "0.1.0"
+#description = "osd-slides is a tool to download Prof. Paine's slides through terminal with one command."
+#authors = ["kkarakas <kutay@karakas.co>"]
+#license = "MIT"
+#readme = "README.md"
+#packages = [{include = "osd_slides"}]
+#
+#[tool.poetry.dependencies]
+#python = "^3.8,3.9"
+#beautifulsoup4 = "^4.11.2"
+
+#[build-system]
+#requires = ["poetry-core"]
+#build-backend = "poetry.core.masonry.api"
+#
+#[project.license]
+#file = "LICENSE"
+#
+#[project.urls]
+#repository = "https://github.com/columbiaoss/example-project-python"
+#
+#[project.optional-dependencies]
+#develop = [
+#    "black>=22",
+#    "flake8>=3.7.8",
+#    "flake8-black>=0.2.1",
+#    "flake8-pyproject",
+#    "pytest>=4.3.0",
+#    "pytest-cov>=2.6.1",
+#]
+#
+#[tool.black]
+#color = true
+#line-length = 120
+#target-version = ['py310']
+#skip-string-normalization = true
+#
+#[tool.check-manifest]
+#ignore = [
+#]
+
+[build-system]
+requires = [
+    "setuptools",
+    "setuptools-scm",
+    "wheel",
+]
+build-backend="setuptools.build_meta"
+
+[project]
+name = "osd_slides"
+authors = [{name = "Kutay Karakas", email = "kutay@karakas.co"}]
+description="osd-slides is a tool to download Prof. Paine's slides through terminal with one command."
+readme = "README.md"
+version = "0.1.0"
+requires-python = ">=3.7"
+dependencies = ["beautifulsoup4==4.11.2"]
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+repository = "https://github.com/kkarakas/osd-slides"
+
+[project.optional-dependencies]
+develop = [
+    "black>=22",
+    "bump2version>=1.0.0",
+    "check-manifest",
+    "flake8>=3.7.8",
+    "flake8-black>=0.2.1",
+    "flake8-pyproject",
+    "mypy",
+    "pytest>=4.3.0",
+    "pytest-cov>=2.6.1",
+    "pytest-mock>=3.10.0",
+    "twine",
+    "wheel",
+]
+
+[tool.black]
+color = true
+line-length = 120
+target-version = ['py310']
+skip-string-normalization = true
+
+[tool.check-manifest]
+ignore = [
+]
+
+[tool.flake8]
+ignore = ['E203', 'W503']
+max-line-length=120
+exclude=[
+    'osd_slides/tests/*'
+]
+per-file-ignores= [
+    'osd_slides/__init__.py:F401, F403'
+]
+
+
+[tool.isort]
+line_length = 120
+known_first_party = 'pydantic'
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+
+[tool.mypy]
+python_version = '3.10'
+# show_error_codes = true
+# follow_imports = 'silent'
+# strict_optional = true
+# warn_redundant_casts = true
+# warn_unused_ignores = true
+# disallow_any_generics = true
+# check_untyped_defs = true
+# no_implicit_reexport = true
+# warn_unused_configs = true
+# disallow_subclassing_any = true
+# disallow_incomplete_defs = true
+# disallow_untyped_decorators = true
+# disallow_untyped_calls = true
+
+[tool.pytest.ini_options]
+asyncio_mode = 'strict'
+testpaths = 'osd_slides/tests'
+
