@@ -6,7 +6,8 @@ from osd_slides.main import (
     fefmalsmc,
     showDownloadablePdf,
     searchAndDownloadPdf,
-    downloadPdf, readAvailableHtmlDocs,
+    downloadPdf,
+    readAvailableHtmlDocs,
 )
 import sys
 import os
@@ -103,8 +104,7 @@ def test_readAvailableHtmlDocs(mocker):
     # TODO work on this
     # make requests.get send a weird
     # make soup have a predetermied value
-    text = \
-        '''
+    text = """
 <html>
 <head>
 <title>Index of /~paine/4995/lectures</title>
@@ -120,20 +120,22 @@ def test_readAvailableHtmlDocs(mocker):
 <tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="03-git.html">03-git.html</a></td><td align="right">2023-02-14 22:46  </td><td align="right"> 25K</td><td> </td></tr> # noqa: E501
 </table>
 <address>Apache/2.4.29 (Ubuntu) Server at www.cs.columbia.edu Port 443</address> # noqa: E501
-</body></html>'''
-    expectedOutput = ['<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="01-intro.html">01-intro.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 19K</td><td> </td></tr>',  # noqa: E501
-                      '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="02-history.html">02-history.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 20K</td><td> </td></tr>', # noqa: E501
-                      '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="03-git.html">03-git.html</a></td><td align="right">2023-02-14 22:46  </td><td align="right"> 25K</td><td> </td></tr>']  # noqa: E501
+</body></html>"""
+    expectedOutput = [
+        '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="01-intro.html">01-intro.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 19K</td><td> </td></tr>',  # noqa: E501
+        '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="02-history.html">02-history.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 20K</td><td> </td></tr>',  # noqa: E501
+        '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="03-git.html">03-git.html</a></td><td align="right">2023-02-14 22:46  </td><td align="right"> 25K</td><td> </td></tr>',
+    ]  # noqa: E501
     soup = MagicMock(text=text)
     # soup["text"] = text
-    mocker.patch('requests.get',
-                 return_value=soup)
+    mocker.patch("requests.get", return_value=soup)
     output = readAvailableHtmlDocs()
     for i in range(len(output)):
         output[i] = str(output[i])
     assert output == expectedOutput
 
-#TODO unvalid URL testing needed
+
+# TODO unvalid URL testing needed
 
 
 def test_downloadPdf():
@@ -149,7 +151,7 @@ def test_downloadPdf():
     os.remove("./01-intro.pdf")
 
 
-@pytest.mark.integtest
+# INTEGRATION TEST
 @patch("builtins.print")
 def test_print_downloadable_integration(mock_print):
     # mocked_searchAndDownloadPdf =
@@ -163,7 +165,6 @@ def test_print_downloadable_integration(mock_print):
         assert mock_print.call_args_list[2].args == ("03-git.html",)
 
 
-# @pytest.mark.integtest
 # def test_download_integration():
 #     """
 #     Takes a long time as it needs to download good amount of files.

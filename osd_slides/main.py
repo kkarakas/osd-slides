@@ -72,8 +72,7 @@ def downloadPdf(file):
     print("Downloading file: ", file)
     try:
         a = subprocess.run(
-            ["npx", "decktape", "reveal", url +
-             file + "#/", file[:-4] + "pdf"],
+            ["npx", "decktape", "reveal", url + file + "#/", file[:-4] + "pdf"],
             capture_output=True,
             check=True,
         )
