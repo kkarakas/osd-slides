@@ -21,5 +21,5 @@ $ npm --version
 $ make test
 ```
 
-### Possible Area Contribute
+### Possible Areas Contribute
 - Add more tests to cover functions
