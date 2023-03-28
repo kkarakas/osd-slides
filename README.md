@@ -10,11 +10,13 @@
 - Open Software Development classes slides are hard to turn it to a pdf and download, this tool will help students to download slides easily. 
 
 ## Features
-- Check if the slide were already downloaded and is the same version.
+- Download osd slides.
 - Force download option eventough it already was downloaded
-- Links that actually work on the slides
-- Search through all the documents to find keywords
 
+## Install
+```sh
+pip install osd-slides
+```
 ## Dependencies
 - Uses Decktape: https://github.com/astefanutti/decktape
 
@@ -28,4 +30,17 @@ You might want to restart your terminal/powershell after installing node.js.
 ```sh
 $ Node --version
 $ npm --version
+```
+
+## How to use
+To show downloadable files. 
+You must be in directory where `__main__.py` is located.
+```sh
+$ python ./__main__.py show
+```
+To download all the files.
+You must be in directory where `__main__.py` is located.
+It will take 30 minutes to download all the files.
+```sh
+$ python ./__main__.py download
 ```
