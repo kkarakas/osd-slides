@@ -6,6 +6,8 @@
 ![GitHub issues](https://img.shields.io/github/issues/kkarakas/osd-slides)
 [![codecov](https://codecov.io/gh/kkarakas/osd-slides/branch/main/graph/badge.svg?token=0TCR1MSIWH)](https://codecov.io/gh/kkarakas/osd-slides)
 ![build](https://img.shields.io/github/actions/workflow/status/kkarakas/osd-slides/build.yaml)
+[![PyPI](https://img.shields.io/pypi/v/osd-slides)](https://pypi.org/project/osd-slides/)
+
 ## Overview
 - Open Software Development classes slides are hard to turn it to a pdf and download, this tool will help students to download slides easily. 
 
