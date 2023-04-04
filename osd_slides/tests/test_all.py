@@ -1,23 +1,28 @@
 from unittest.mock import patch, call, MagicMock
 
-import pytest
+# import pytest
 from bs4 import BeautifulSoup
-from osd_slides.main import (
-    fefmalsmc,
-    showDownloadablePdf,
-    searchAndDownloadPdf,
-    downloadPdf,
-    readAvailableHtmlDocs,
-)
+
+# from osd_slides.main import (
+#     fefmalsmc,
+#     showDownloadablePdf,
+#     searchAndDownloadPdf,
+#     downloadPdf,
+#     readAvailableHtmlDocs,
+# )
 import sys
 import os
+
+from ..main import Downloader
+
+downloader = Downloader()
 
 
 @patch("builtins.print")
 def test_main0(mock_print):
     testargs = ["prog", "download", "randomstuff"]
     with patch.object(sys, "argv", testargs):
-        fefmalsmc()
+        downloader.fefmalsmc()  # changed
         assert mock_print.call_args.args == ("Too many arguments",)
 
 
@@ -25,7 +30,7 @@ def test_main0(mock_print):
 def test_main1(mock_print):
     testargs = ["prog"]
     with patch.object(sys, "argv", testargs):
-        fefmalsmc()
+        downloader.fefmalsmc()
         assert mock_print.call_args.args == ("Too few arguments",)
 
 
@@ -33,19 +38,19 @@ def test_main1(mock_print):
 
 
 def test_main2(mocker):
-    mocked_searchAndDownloadPdf = mocker.patch("osd_slides.main.searchAndDownloadPdf")  # noqa: E501
+    mocked_searchAndDownloadPdf = mocker.patch("osd_slides.main.Downloader.searchAndDownloadPdf")  # noqa: E501
 
     testargs = ["prog", "download"]
     with patch.object(sys, "argv", testargs):
-        fefmalsmc()
+        downloader.fefmalsmc()
         mocked_searchAndDownloadPdf.assert_called_once()
 
 
 def test_main3(mocker):
-    mocked_searchAndDownloadPdf = mocker.patch("osd_slides.main.showDownloadablePdf")  # noqa: E501
+    mocked_searchAndDownloadPdf = mocker.patch("osd_slides.main.Downloader.showDownloadablePdf")  # noqa: E501
     testargs = ["prog", "show"]
     with patch.object(sys, "argv", testargs):
-        fefmalsmc()
+        downloader.fefmalsmc()
         mocked_searchAndDownloadPdf.assert_called_once_with()
 
 
@@ -53,7 +58,7 @@ def test_main3(mocker):
 
 
 def test_searchAndDownloadPdf(mocker):
-    mocked_downloadPdf = mocker.patch("osd_slides.main.downloadPdf")
+    mocked_downloadPdf = mocker.patch("osd_slides.main.Downloader.downloadPdf")
     data = [
         """<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/>
         </td><td><a href="01-intro.html">01-intro.html</a></td>
@@ -69,8 +74,8 @@ def test_searchAndDownloadPdf(mocker):
     for datum in data:
         soup.append(BeautifulSoup(datum, "html.parser"))
     # TODO repetitive work maybe have a class structure?
-    mocker.patch("osd_slides.main.readAvailableHtmlDocs", return_value=soup)
-    searchAndDownloadPdf()
+    mocker.patch("osd_slides.main.Downloader.readAvailableHtmlDocs", return_value=soup)  # noqa: E501
+    downloader.searchAndDownloadPdf()
     #  check what is download called with assert_called_with
     calls = [call("01-intro.html"), call("02-history.html")]
     mocked_downloadPdf.assert_has_calls(calls)
@@ -90,8 +95,8 @@ def test_showDownloadablePdf0(mock_print, mocker):
     for datum in data:
         soup.append(BeautifulSoup(datum, "html.parser"))
 
-    mocker.patch("osd_slides.main.readAvailableHtmlDocs", return_value=soup)
-    showDownloadablePdf()
+    mocker.patch("osd_slides.main.Downloader.readAvailableHtmlDocs", return_value=soup)  # noqa: E501
+    downloader.showDownloadablePdf()
 
     assert mock_print.call_args_list[0].args == ("01-intro.html",)
     assert mock_print.call_args_list[1].args == ("02-history.html",)
@@ -124,12 +129,12 @@ def test_readAvailableHtmlDocs(mocker):
     expectedOutput = [
         '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="01-intro.html">01-intro.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 19K</td><td> </td></tr>',  # noqa: E501
         '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="02-history.html">02-history.html</a></td><td align="right">2023-03-05 13:21  </td><td align="right"> 20K</td><td> </td></tr>',  # noqa: E501
-        '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="03-git.html">03-git.html</a></td><td align="right">2023-02-14 22:46  </td><td align="right"> 25K</td><td> </td></tr>',
+        '<tr><td valign="top"><img alt="[TXT]" src="/icons/text.gif"/></td><td><a href="03-git.html">03-git.html</a></td><td align="right">2023-02-14 22:46  </td><td align="right"> 25K</td><td> </td></tr>',  # noqa: E501
     ]  # noqa: E501
     soup = MagicMock(text=text)
     # soup["text"] = text
     mocker.patch("requests.get", return_value=soup)
-    output = readAvailableHtmlDocs()
+    output = downloader.readAvailableHtmlDocs()
     for i in range(len(output)):
         output[i] = str(output[i])
     assert output == expectedOutput
@@ -146,7 +151,7 @@ def test_downloadPdf():
     file = "01-intro.html"
     if os.path.isfile("./01-intro.pdf"):
         os.remove("./01-intro.pdf")
-    downloadPdf(file)
+    downloader.downloadPdf(file)
     assert os.path.isfile("./01-intro.pdf")
     os.remove("./01-intro.pdf")
 
@@ -159,7 +164,7 @@ def test_print_downloadable_integration(mock_print):
     testargs = ["prog", "show"]
     #  TODO improve the testing by mocking
     with patch.object(sys, "argv", testargs):
-        fefmalsmc()
+        downloader.fefmalsmc()
         assert mock_print.call_args_list[0].args == ("01-intro.html",)
         assert mock_print.call_args_list[1].args == ("02-history.html",)
         assert mock_print.call_args_list[2].args == ("03-git.html",)
