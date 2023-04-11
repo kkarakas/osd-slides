@@ -7,20 +7,21 @@
 [![codecov](https://codecov.io/gh/kkarakas/osd-slides/branch/main/graph/badge.svg?token=0TCR1MSIWH)](https://codecov.io/gh/kkarakas/osd-slides)
 ![build](https://img.shields.io/github/actions/workflow/status/kkarakas/osd-slides/build.yaml)
 [![PyPI](https://img.shields.io/pypi/v/osd-slides)](https://pypi.org/project/osd-slides/)
+[![Docs](https://img.shields.io/readthedocs/osd-slides)](https://osd-slides.readthedocs.io/en/latest/)
 
 ## Overview
 - Open Software Development classes slides are hard to turn it to a pdf and download, this tool will help students to download slides easily. 
 
 ## Features
 - Download osd slides.
-- Force download option eventough it already was downloaded
+- Force download option even though it already was downloaded
 
 ## Install
 ```sh
 pip install osd-slides
 ```
 ## Dependencies
-- Uses Decktape: https://github.com/astefanutti/decktape
+- Uses [Decktape](https://github.com/astefanutti/decktape)
 
 To install decktape, run in osd-slides.
 ```sh
@@ -35,14 +36,21 @@ $ npm --version
 ```
 
 ## How to use
-To show downloadable files. 
-You must be in directory where `__main__.py` is located.
-```sh
-$ python ./__main__.py show
+Users can download files by calling searchAndDownloadPdf().
+```python
+import osd-slides
+ searchAndDownloadPdf()
 ```
-To download all the files.
-You must be in directory where `__main__.py` is located.
-It will take 30 minutes to download all the files.
-```sh
-$ python ./__main__.py download
+
+Users can view what files can be downloaded by calling showDownloadablePdf()
+```python
+import osd-slides
+ showDownloadablePdf()
+```
+
+## Example
+Running this below will printout all the files available for download.
+```python
+import osd-slides
+ showDownloadablePdf()
 ```

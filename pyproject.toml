@@ -91,6 +91,10 @@ develop = [
     "pytest-mock>=3.10.0",
     "twine",
     "wheel",
+    "sphinx",
+#    "sphinx_rtd_theme",
+    "myst-parser"
+
 ]
 
 [tool.black]

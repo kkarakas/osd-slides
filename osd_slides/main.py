@@ -26,6 +26,10 @@ def fefmalsmc():
 
 # TODO be able to download individual files
 def searchAndDownloadPdf():
+    '''
+    Downloads all the class presentations.
+    :return: Null
+    '''
     docs = readAvailableHtmlDocs()
 
     for doc in docs:
@@ -40,6 +44,10 @@ def searchAndDownloadPdf():
 
 
 def showDownloadablePdf():
+    '''
+    Shows all the downloaddable pdf's.
+    :return: Null
+    '''
     docs = readAvailableHtmlDocs()
 
     for doc in docs:
