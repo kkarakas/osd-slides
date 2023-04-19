@@ -15,13 +15,16 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="temp" href="modules.html" /> 
   </head><body>
     <div class="header-wrapper" role="banner">
       <div class="header">
         <div class="headertitle"><a
           href="#">osd-slides 0.1.4 documentation</a></div>
         <div class="rel" role="navigation" aria-label="related navigation">
+          <a href="modules.html" title="temp"
+             accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -64,12 +67,14 @@ $<span class="w"> </span>npm<span class="w"> </span>--version
 <h1>How to use<a class="headerlink" href="#how-to-use" title="Permalink to this heading">¶</a></h1>
 <p>Users can download files by calling searchAndDownloadPdf().</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">osd</span><span class="o">-</span><span class="n">slides</span>
- <span class="n">searchAndDownloadPdf</span><span class="p">()</span>
+<span class="n">downloader</span> <span class="o">=</span> <span class="n">osd</span><span class="o">-</span><span class="n">slides</span><span class="o">.</span><span class="n">Downloader</span><span class="p">()</span>
+<span class="n">downloader</span><span class="o">.</span><span class="n">searchAndDownloadPdf</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Users can view what files can be downloaded by calling showDownloadablePdf()</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">osd</span><span class="o">-</span><span class="n">slides</span>
- <span class="n">showDownloadablePdf</span><span class="p">()</span>
+<span class="n">downloader</span> <span class="o">=</span> <span class="n">osd</span><span class="o">-</span><span class="n">slides</span><span class="o">.</span><span class="n">Downloader</span><span class="p">()</span>
+<span class="n">downloader</span><span class="o">.</span><span class="n">showDownloadablePdf</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -77,26 +82,19 @@ $<span class="w"> </span>npm<span class="w"> </span>--version
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h1>
 <p>Running this below will printout all the files available for download.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">osd</span><span class="o">-</span><span class="n">slides</span>
- <span class="n">showDownloadablePdf</span><span class="p">()</span>
+<span class="n">downloader</span> <span class="o">=</span> <span class="n">osd</span><span class="o">-</span><span class="n">slides</span><span class="o">.</span><span class="n">Downloader</span><span class="p">()</span>
+<span class="n">downloader</span><span class="o">.</span><span class="n">showDownloadablePdf</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="methods">
 <h1>Methods<a class="headerlink" href="#methods" title="Permalink to this heading">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="osd_slides.main.searchAndDownloadPdf">
-<span class="sig-prename descclassname"><span class="pre">osd_slides.main.</span></span><span class="sig-name descname"><span class="pre">searchAndDownloadPdf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#osd_slides.main.searchAndDownloadPdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Downloads all the class presentations.
-:return: Null</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="osd_slides.main.showDownloadablePdf">
-<span class="sig-prename descclassname"><span class="pre">osd_slides.main.</span></span><span class="sig-name descname"><span class="pre">showDownloadablePdf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#osd_slides.main.showDownloadablePdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shows all the downloaddable pdf’s.
-:return: Null</p>
-</dd></dl>
-
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">temp</a></li>
+</ul>
+</div>
 </div>
 
 
@@ -108,7 +106,11 @@ $<span class="w"> </span>npm<span class="w"> </span>--version
         <div class="sidebar">
           
           <h3>Table of Contents</h3>
-          
+          <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">temp</a></li>
+</ul>
+
           <div role="search">
             <h3 style="margin-top: 1.5em;">Search</h3>
             <form class="search" action="search.html" method="get">
@@ -126,6 +128,8 @@ $<span class="w"> </span>npm<span class="w"> </span>--version
       <div class="footer">
         <div class="left">
           <div role="navigation" aria-label="related navigaton">
+            <a href="modules.html" title="temp"
+              >next</a> |
             <a href="genindex.html" title="General Index"
               >index</a>
           </div>

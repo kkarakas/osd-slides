@@ -30,20 +30,23 @@ $ npm --version
 Users can download files by calling searchAndDownloadPdf().
 ```python
 import osd-slides
- searchAndDownloadPdf()
+downloader = osd-slides.Downloader()
+downloader.searchAndDownloadPdf()
 ```
 
 Users can view what files can be downloaded by calling showDownloadablePdf()
 ```python
 import osd-slides
- showDownloadablePdf()
+downloader = osd-slides.Downloader()
+downloader.showDownloadablePdf()
 ```
 
 # Example
 Running this below will printout all the files available for download.
 ```python
 import osd-slides
- showDownloadablePdf()
+downloader = osd-slides.Downloader()
+downloader.showDownloadablePdf()
 ```
 
 # Methods
@@ -54,5 +57,13 @@ import osd-slides
 
 ```{eval-rst}
 .. note: 
-   Blah Blah
+   Blah Blah blah
 ```
+
+```{eval-rst}
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents
+
+   modules
+ ```
