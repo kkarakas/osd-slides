@@ -1,0 +1,2 @@
+myst_parser==1.0.0
+osd-slides==0.1.3
