@@ -12,7 +12,7 @@ url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
 
 class Downloader:
     def fefmalsmc(self):
-        if len(sys.argv) >= 4:
+        if len(sys.argv) >= 4:  # perhaps should be 3 now
             print("Too many arguments")
             # perhaps should throw an error or something
 
@@ -27,9 +27,15 @@ class Downloader:
                 self.showDownloadablePdf()
 
             elif sys.argv[1] == "search":
-                a = Search(url, [sys.argv[2]])
-                a.lookup("Legal")
-                a.open()
+                print("Which slides would you like to search in? Please provide slides with spaces between them: ")
+                slides = input().split()
+                print("Slides reading completed")
+                # a = Search(url, [sys.argv[2]])
+                a = Search(url, slides)
+                print("What keyword would you like to look up: ")
+                a.lookup(input())
+                print("Which one would you like to open? please provide the number.")
+                a.open(int(input()) - 1)
                 # TODO change it to make it better
 
     # TODO be able to download individual files

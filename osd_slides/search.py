@@ -18,7 +18,8 @@ class Search:
         :param slides: List that contains slide names that needs to be searched. Slide names can be found by using
         Downloader.showDownloadablePdf()
         '''
-        self.text = [defaultdict(dict)] * len(slides)
+        self.text = [defaultdict(dict) for _ in range(len(slides))]
+
         self.answers = []
         self.slides = slides
         self.url = url  # TODO this should be read from properties file
@@ -48,9 +49,13 @@ class Search:
     def lookup(self, keyword):
         '''
         Looks up the keyword in slides.
-        :param keyword: Keyword is searched through the slides.
-        :return:
+
+        keyword: Keyword is searched through the slides.
+
+        Returns:
+            Null
         '''
+
         # it will look up the word in the dict and come up with possible answers
         self.answers = []  # resetted
         for i in range(len(self.text)):
@@ -74,8 +79,11 @@ class Search:
         '''
         lookup() must be called fist.
         Opens the exact slide were the keyword was found using index.
-        :param idx: Index to decide which exact slide to open.
-        :return:
+
+        idx: Index to decide which exact slide to open.
+
+        Returns:
+                Null
         '''
         if not self.answers:
             raise FileNotFoundError("Lookup not performed in order to open")
