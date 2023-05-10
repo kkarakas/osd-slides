@@ -1,7 +1,8 @@
+from collections import defaultdict
 from unittest.mock import patch, call, MagicMock
 
-# import pytest
 from bs4 import BeautifulSoup
+import pytest
 
 # from osd_slides.main import (
 #     fefmalsmc,
@@ -13,14 +14,17 @@ from bs4 import BeautifulSoup
 import sys
 import os
 
+
 from ..main import Downloader
+from ..search import Search
 
 downloader = Downloader()
+url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
 
 
 @patch("builtins.print")
 def test_main0(mock_print):
-    testargs = ["prog", "download", "randomstuff"]
+    testargs = ["prog", "download", "random-stuff", "more random"]
     with patch.object(sys, "argv", testargs):
         downloader.fefmalsmc()  # changed
         assert mock_print.call_args.args == ("Too many arguments",)
@@ -156,7 +160,108 @@ def test_downloadPdf():
     os.remove("./01-intro.pdf")
 
 
-# INTEGRATION TEST
+def test_search_init0():
+    search = Search(url)
+    assert search.text == []
+
+
+def test_search_init1():
+    search = Search(url, ["22-legal.html"])
+    # TODO perhaps soup data can be inserted like above
+    assert search.text[0][2][0] == (
+        '## Major Legal Areas In the field of software development, three areas are important.'
+    )
+
+
+@patch("builtins.print")
+def test_lookup0(mock_print):
+    '''
+    Testing lookup with no result
+    :param mock_print:
+    :return:
+    '''
+    search = Search(url)
+    search.text = [defaultdict(dict)] * 1  # nothing inserted
+    search.lookup("test")
+    # check what is being printed
+    assert mock_print.call_args_list[0].args == ("No slides were found",)
+
+
+@patch("builtins.print")
+def test_lookup1(mock_print):
+    '''
+    Testing lookup with no result
+    :param mock_print:
+    :return:
+    '''
+    search = Search(url)
+    search.text = [
+        dict(
+            {
+                1: {
+                    0: "## Legal We'll break our discussion of legal issues into three categories",
+                    1: 'Legal Fields Copyright Trademark Patent',
+                    2: 'Project Copyright and Licenses',
+                    3: 'Major Issues and Court Cases Oracle v. Google Cloud licensing / anticompetitive practices',
+                }
+            }
+        )
+    ]
+    search.slides = ["slide1"]
+    search.lookup("Legal")
+    # check what is being printed
+    assert mock_print.call_args_list[0].args == ("Slides that can be found are",)
+    assert mock_print.call_args_list[1].args == ([(1, 0, 'slide1'), (1, 1, 'slide1')],)
+
+
+def test_open0(mocker):
+    # calls webopen with certain parameters!
+    mocked_webbrowser_open = mocker.patch("webbrowser.open")
+    search = Search(url)
+    search.answers = [(1, 0, 'slide1'), (1, 1, 'slide1')]
+    search.open()
+    mocked_webbrowser_open.assert_called_once_with('https://www.cs.columbia.edu/~paine/4995/lectures/slide1#/1/0')
+
+
+def test_open1(mocker):
+    # calls webopen with certain parameters!
+    mocked_webbrowser_open = mocker.patch("webbrowser.open")
+    search = Search(url)
+    search.answers = [(1, 0, 'slide1'), (1, 1, 'slide1')]
+    search.open(1)
+    mocked_webbrowser_open.assert_called_once_with('https://www.cs.columbia.edu/~paine/4995/lectures/slide1#/1/1')
+
+
+def test_open2(mocker):
+    '''
+    Test with index value used
+    :param mocker:
+    :return:
+    '''
+    # calls webopen with certain parameters!
+    mocked_webbrowser_open = mocker.patch("webbrowser.open")
+    search = Search(url)
+    search.answers = [(1, 0, 'slide1'), (1, 1, 'slide1')]
+
+    with pytest.raises(IndexError) as e_info:
+        search.open(2)
+
+
+def test_open3():
+    '''
+    throws error when lookup is not performed before
+    :return:
+    '''
+    search = Search(url)
+
+    with pytest.raises(FileNotFoundError) as e_info:
+        search.open()
+
+
+# temp here
+
+
+# INTEGRATION TESTS
 @patch("builtins.print")
 def test_print_downloadable_integration(mock_print):
     # mocked_searchAndDownloadPdf =
@@ -224,3 +329,19 @@ def test_print_downloadable_integration(mock_print):
 #         for doc in check:
 #             assert os.path.isfile(doc)
 #             os.remove(doc)
+
+
+@patch("builtins.print")
+def test_search_integration(mock_print, mocker):
+    '''
+    Webdriver in the end is not called
+    :param mocker:
+    :return:
+    '''
+    mocked_webbrowser_open = mocker.patch("webbrowser.open")
+    search = Search(url, ["22-legal.html"])
+    search.lookup('Legal')
+    search.open(2)
+    mocked_webbrowser_open.assert_called_once_with(
+        'https://www.cs.columbia.edu/~paine/4995/lectures/22-legal.html#/2/0'
+    )

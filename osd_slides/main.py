@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import sys
 import subprocess
 
+from osd_slides.search import Search
+
 # TODO perhaps better to use properties file
 #  using jproperties here instead of using a string.
 url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
@@ -10,7 +12,7 @@ url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
 
 class Downloader:
     def fefmalsmc(self):
-        if len(sys.argv) >= 3:
+        if len(sys.argv) >= 4:
             print("Too many arguments")
             # perhaps should throw an error or something
 
@@ -23,6 +25,12 @@ class Downloader:
 
             elif sys.argv[1] == "show":
                 self.showDownloadablePdf()
+
+            elif sys.argv[1] == "search":
+                a = Search(url, [sys.argv[2]])
+                a.lookup("Legal")
+                a.open()
+                # TODO change it to make it better
 
     # TODO be able to download individual files
     def searchAndDownloadPdf(self):
