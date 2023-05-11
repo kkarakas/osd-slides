@@ -1,4 +1,4 @@
-temp
+Documentation for Downloader and Search
 ============
 
 .. toctree::

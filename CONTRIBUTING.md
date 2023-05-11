@@ -23,3 +23,4 @@ $ make test
 
 ### Possible Areas Contribute
 - Add more tests to cover functions
+- In Search class there are many random tags that get read into self.text. It would be helpful for someone to clean those.

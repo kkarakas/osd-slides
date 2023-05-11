@@ -26,6 +26,9 @@ format:  ## run autoformatting with black
 # alias
 fix: format
 
+show-format:  ## show what will change when format is run
+	python -m black --check --diff osd_slides setup.py
+
 check:  ## check assets for packaging
 	check-manifest -v
 
