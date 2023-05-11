@@ -54,7 +54,7 @@ name = "osd_slides"
 authors = [{name = "Kutay Karakas", email = "kutay@karakas.co"}]
 description="osd-slides is a tool to download Prof. Paine's slides through terminal with one command."
 readme = "README.md"
-version = "0.1.4"
+version = "0.2.1"
 requires-python = ">=3.7"
 dependencies = ["beautifulsoup4==4.11.2"]
 

@@ -87,7 +87,7 @@ class Search:
         '''
         if not self.answers:
             raise FileNotFoundError("Lookup not performed in order to open")
-        if idx >= len(self.answers):  # idx too big
+        if idx >= len(self.answers) or idx < 0:  # idx too big
             raise IndexError("index out of bounds")
         webbrowser.open(
             "{}{}#/{}/{}".format(self.url, self.answers[idx][2], self.answers[idx][0], self.answers[idx][1])
