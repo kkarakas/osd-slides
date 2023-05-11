@@ -1,5 +1,5 @@
 # osd-slides
-`osd-slides` is a tool to download Prof. Paine's slides through terminal with one command. 
+`osd-slides` is a tool to download and search Prof. Paine's slides through terminal or with one command or as library. 
 
 [![](https://img.shields.io/badge/project-link-green)](https://github.com/kkarakas/osd-slides)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,8 @@
 ![build](https://img.shields.io/github/actions/workflow/status/kkarakas/osd-slides/build.yaml)
 [![PyPI](https://img.shields.io/pypi/v/osd-slides)](https://pypi.org/project/osd-slides/)
 [![Docs](https://img.shields.io/readthedocs/osd-slides)](https://osd-slides.readthedocs.io/en/latest/)
-[![Pages](https://img.shields.io/badge/Github%20Pages-Available-green)](https://kkarakas.github.io/osd-slides/)
+
+[//]: # ([![Pages]&#40;https://img.shields.io/badge/Github%20Pages-Available-green&#41;]&#40;https://kkarakas.github.io/osd-slides/&#41;)
 
 ## Overview
 - Open Software Development classes slides are hard to turn it to a pdf and download and search for keywords. This tool will help students to download slides and search for keywords in slides easily. 
@@ -41,20 +42,20 @@ $ npm --version
 ## How to use
 Users can download files by calling searchAndDownloadPdf().
 ```python
-import osd-slides
+from osd-slides.osd_slides.main import Downloader
 downloader = Downloader()
 downloader.searchAndDownloadPdf()
 ```
 
 Users can view what files can be downloaded by calling showDownloadablePdf()
 ```python
-import osd-slides
+from osd-slides.osd_slides.main import Downloader
 downloader = Downloader()
 downloader.showDownloadablePdf()
 ```
 Users can search for keywords in slides and open the exact slide the keyword exists.
 ```python
-import osd-slides
+from osd-slides.osd_slides.search import Search
 url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
 search = Search(url, ["22-legal.html","21-econ.html"])
 search.lookup("Legal")
@@ -64,7 +65,7 @@ search.open(1)
 
 As said above users can search for keywords in slides and open the exact slide the keyword exists. 
 ```python
-import osd-slides
+from osd-slides.osd_slides.search import Search
 url = "https://www.cs.columbia.edu/~paine/4995/lectures/"
 search = Search(url, ["22-legal.html","21-econ.html"])
 search.lookup("Legal")

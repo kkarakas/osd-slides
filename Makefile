@@ -71,16 +71,16 @@ tests: test
 # ########
 # # DIST #
 # ########
-# dist-build:  # Build python dist
-# 	python setup.py sdist bdist_wheel
+dist-build:  # Build python dist
+	python setup.py sdist bdist_wheel
 
-# dist-check:
-# 	python -m twine check dist/*
+dist-check:
+	python -m twine check dist/*
 
-# dist: clean build dist-build dist-check  ## Build dists
+dist: clean build dist-build dist-check  ## Build dists
 
-# publish:  # Upload python assets
-# 	echo "would usually run python -m twine upload dist/* --skip-existing"
+publish:  # Upload python assets
+	echo "would usually run python -m twine upload dist/* --skip-existing"
 
 #########
 # CLEAN #
